@@ -1,6 +1,7 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
+<h2>Admin Dashboard</h2>
 <table>
     <thead>
         <tr>
@@ -13,16 +14,19 @@
     <tbody>
         {% for req in pending_requests %}
         <tr>
-            <td>{{ req.shipper.username }}</td>
+            <td>{{ req.document.exporter.username }}</td>
             <td>{{ req.document.title }}</td>
             <td>{{ req.status }}</td>
             <td>
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" name="request_id" value="{{ req.id }}">
+                    {% if req.status == "Pending" %}
                     <button name="action" value="verify">Verify Forgery</button>
+                    {% elif req.status == "Forgery Check Passed" %}
                     <button name="action" value="approve">Approve</button>
                     <button name="action" value="reject">Reject</button>
+                    {% endif %}
                 </form>
             </td>
         </tr>

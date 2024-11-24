@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import *
-from doc_manager.views import actor_Dashboard_with_all_docs
+from doc_manager.views import actor_Dashboard_with_all_docs, admin_dashboard
+
 
 app_name = "user"
 
